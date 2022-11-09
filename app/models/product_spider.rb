@@ -5,12 +5,12 @@ class ProductSpider
     @url = url
 
     @html = Nokogiri.HTML(URI.open(url))
-    @cateogy = @html.css('a._2whKao')[1].text
+    @category = @html.css('a._2whKao')[1].text
   end
 
   def parse
-    cateogy = Category.find_or_create_by(name: @cateogy)
-    item = Product.find_or_create_by(url: @url)
+    category = Category.find_or_create_by(name: @category)
+    item = category.products.find_or_create_by(url: @url)
 
     item[:title]          = @html.css('h1.yhB1nd > span.B_NuCI').text
     item[:price]          = @html.css('.CEmiEU > ._25b18c > ._16Jk6d').text.gsub(',','').gsub(/[^[:ascii:]]/, "").to_f
