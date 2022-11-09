@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 7.days do
+every 1.day, at: '11:00 am' do
   rake 'batch:expire_product_data'
 end
